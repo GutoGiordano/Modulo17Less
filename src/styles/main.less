@@ -1,0 +1,120 @@
+//@import "variaveis.less"; //Importando o arquivo variáveis - apagou o arquivo variáveis mas eu vou deixar como exemplo
+@import "mapas.less"; //Importando o arquivo de mapas
+
+@breakpointMobile: ~"(max-width: 767px)"; //skaping, que nesse caso foi uma regra de usabilidade
+@breakpointTablet: ~"(min-width:768px) and (max-width: 1023px)";
+
+.marginBotton8 { //Criando os mixins
+    margin-bottom: 8px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Roboto", sans-serif;
+}
+
+body {
+    background-color: #colors[backgroundColor]; //Chamando as cores do mapeamento
+    color: #colors[textColor];
+}
+
+li {
+    list-style: none;
+}
+
+.container {
+    max-width: 960px;
+    width: 100%;
+    margin: 0 auto;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    //Atentar para a cascata e colocar sempre na ordem para evitar erros. Nesse caso
+    //se o breakpont do mobile vier primeiro, ele não aplica a regra do mobile pois
+    //a medida do Mobile está dentro da do Tablet.
+    //Para resolver, podemos limitar na regra do breakpoint, colocando um min-width
+
+    @media @breakpointMobile { //chamando o skaping
+        max-width: 70%;
+    }
+
+    @media @breakpointTablet { //chamando o skaping
+        max-width: 80%;
+    }
+}
+
+header {
+    padding-bottom: 24px;
+
+    .profile-avatar {
+        display: block;
+        margin: 0 auto 24px;
+        border-radius: 100px;
+    }
+}
+
+.profile-bio {
+    text-align: center;
+    
+    &-name { //aqui o & substitue o restante do nome por ser igual.
+        font-size: 16px;
+        .marginBotton8();
+    }
+
+    &-subtitle {
+        font-size: 14px;
+        .marginBotton8(); //Chamando os mixins
+    }
+
+    &-description {
+        font-size: 14px;
+        opacity: 70%; //definindo uma opacidade para o texto
+    }
+}
+
+.social-links {
+    display: flex;
+    justify-content: space-between;
+    max-width: 240px;
+    width: 100%;
+    margin: 0 auto;
+
+    li {
+        img {
+            &:hover {
+                transition: all ease .3s;
+                transform: scale(1.3); //Adicinando uma animação nos ícones
+            }
+        }
+    }
+}
+
+.projects-list {
+    margin-top: 32px;
+
+    &-item {
+        a {
+            text-decoration: none;
+            background-color: #colors[buttonColor];
+            display:block;
+            padding: 16px 20px;
+            margin-bottom: 16px;
+            text-align: center;
+            color: #colors[textColor];
+            font-weight: bold;
+            border-radius: 30px;
+            border: 2px solid #colors[buttonColor];
+            transition: all ease .5s;
+
+            &:hover {
+                color: #colors[buttonColor];
+                background-color: transparent;
+            }
+        }
+    }
+}
+
